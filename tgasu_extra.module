@@ -1,0 +1,33 @@
+<?php
+
+function tgasu_extra_block_info(){
+  $blocks = array();
+
+  $blocks['slider'] = array(
+    'info' => t('Tgasu slider'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $blocks;
+}
+
+
+function tgasu_extra_block_view($delta = ''){
+ $block = array();
+ $block['subject'] = t('<none>');
+ $block['content'] = theme('tgasu_extra_slider');
+ 
+ return $block;
+}
+
+function tgasu_extra_theme($existing, $type, $theme, $path){
+  $themes = array();
+  
+  $themes = array(
+  'tgasu_extra_slider' => array(
+   'template' => 'tgasu-extra-slider',
+   ),
+  );
+ 
+ return $themes;
+}

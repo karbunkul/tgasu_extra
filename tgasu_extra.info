@@ -1,0 +1,4 @@
+name = Tgasu extra
+description = Blocks and settings for tgasu site
+core = 7.x
+package = Tgasu
