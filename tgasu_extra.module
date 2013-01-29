@@ -3,8 +3,13 @@
 function tgasu_extra_block_info(){
   $blocks = array();
 
-  $blocks['slider'] = array(
+  $blocks['tgasu_slider'] = array(
     'info' => t('Tgasu slider'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
+  $blocks['tgasu_footer'] = array(
+    'info' => t('Tgasu footer'),
     'cache' => DRUPAL_NO_CACHE,
   );
 
@@ -13,8 +18,18 @@ function tgasu_extra_block_info(){
 
 function tgasu_extra_block_view($delta = ''){
  $block = array();
- $block['subject'] = t('<none>');
- $block['content'] = theme('tgasu_extra_slider');
+
+ switch ($delta){
+  case 'tgasu_slider':
+    $block['subject'] = t('<none>');
+    $block['content'] = theme('tgasu_extra_slider');
+    break;
+  case 'tgasu_footer':
+    $block['subject'] = t('<none>');
+    $block['content'] = theme('tgasu_extra_footer');
+    break;
+ }
+ 
  
  return $block;
 }
@@ -22,11 +37,8 @@ function tgasu_extra_block_view($delta = ''){
 function tgasu_extra_theme($existing, $type, $theme, $path){
   $themes = array();
   
-  $themes = array(
-  'tgasu_extra_slider' => array(
-   'template' => 'tgasu-extra-slider',
-   ),
-  );
+  $themes['tgasu_extra_slider'] = array('template' => 'tgasu-extra-slider');
+  $themes['tgasu_extra_footer'] = array('template' => 'tgasu-extra-footer');
  
  return $themes;
 }
