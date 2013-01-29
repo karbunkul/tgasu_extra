@@ -11,7 +11,6 @@ function tgasu_extra_block_info(){
   return $blocks;
 }
 
-
 function tgasu_extra_block_view($delta = ''){
  $block = array();
  $block['subject'] = t('<none>');
@@ -34,7 +33,9 @@ function tgasu_extra_theme($existing, $type, $theme, $path){
 
 function template_preprocess_tgasu_extra_slider(&$vars){
   $slides = array();
-  $active = 'main';
+  $active = 'slide-2';
+  $max_width = '940px';
+  $min_height = '312px';
   
   $banner_dir = 'http://localhost/devel/' . drupal_get_path('theme', 'tgasu') . '/banner';
   
@@ -54,4 +55,38 @@ function template_preprocess_tgasu_extra_slider(&$vars){
   
   $vars['slides'] = $slides;
   $vars['active'] = $active;
+  $vars['max_width'] = $max_width;
+  $vars['min_height'] = $min_height;
+}
+
+function tgasu_extra_menu(){
+  $items = array();
+  
+  $items['admin/config/media/tgasu-slider'] = array(
+    'title' => t('Slider'),
+    'description' => 'Bootstrap slider for <a href="http://tgasu.ru">tgasu.ru</a>',
+    'page callback' => 'page_slides_callback',
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
+  return $items;
+}
+
+function page_slides_callback(){
+  $page = array();
+  /*
+  $page['preview'] = array(
+    '#title' => t('Preview'),
+    '#type' => 'markup',
+    '#markup' => theme('tgasu_extra_slider'),
+  );
+  */
+  $page['title'] = array(
+    '#title' => 'Title',
+    '#type' => 'markup',
+    '#markup' => 'Title',
+  );
+  
+  return $page;
 }

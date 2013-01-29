@@ -1,8 +1,7 @@
-<div id="main-banner" class="carousel slide" style="max-width:940px;">
+<div id="main-banner" class="carousel slide" style="max-width: <?php print $max_width; ?>; min-height: <?php print $min_height; ?>;">
   <!-- slider items -->
   <div class="carousel-inner">
 	<?php foreach ($slides AS $key => $slide): ?>
-	  <?php dsm($slide); ?>
 		<div class="<?php $active == $key ? print "active " : print "" ?>item">
 		  <?php print $slide['content']; ?>
 			<div class="carousel-caption">
