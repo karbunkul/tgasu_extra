@@ -31,3 +31,27 @@ function tgasu_extra_theme($existing, $type, $theme, $path){
  
  return $themes;
 }
+
+function template_preprocess_tgasu_extra_slider(&$vars){
+  $slides = array();
+  $active = 'main';
+  
+  $banner_dir = 'http://localhost/devel/' . drupal_get_path('theme', 'tgasu') . '/banner';
+  
+  $slides['main'] = array(
+	'title' => 'First slide',
+	'class' => '',
+	'content' => "<img src='$banner_dir/1.jpg'>",
+	'description' => '<p>Ну а тут можно выводить любой текст, в том числе и такие ссылки <a href="/node/1"><button class="btn btn-danger">подробнее</button></a></p>',
+  );
+
+  $slides['slide-2'] = array(
+	'title' => 'Second slide',
+	'class' => '',
+	'content' => "<img src='$banner_dir/2.jpg'>",
+	'description' => 'some text',
+  );
+  
+  $vars['slides'] = $slides;
+  $vars['active'] = $active;
+}
