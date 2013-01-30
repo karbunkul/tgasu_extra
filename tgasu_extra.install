@@ -1,122 +1,7 @@
 <?php
 
-function tgasu_extra_block_info(){
-  $blocks = array();
-
-  $blocks['tgasu_slider'] = array(
-    'info' => t('Tgasu slider'),
-    'cache' => DRUPAL_NO_CACHE,
-  );
-  
-  $blocks['tgasu_footer'] = array(
-    'info' => t('Tgasu footer'),
-    'cache' => DRUPAL_NO_CACHE,
-  );
-
-  return $blocks;
-}
-
-function tgasu_extra_block_view($delta = ''){
- $block = array();
-
- switch ($delta){
-  case 'tgasu_slider':
-    $block['subject'] = t('<none>');
-    $block['content'] = theme('tgasu_extra_slider');
-    break;
-  case 'tgasu_footer':
-    $block['subject'] = t('<none>');
-    $block['content'] = theme('tgasu_extra_footer');
-    break;
- }
- 
- 
- return $block;
-}
-
-function tgasu_extra_theme($existing, $type, $theme, $path){
-  $themes = array();
-  
-  $themes['tgasu_extra_slider'] = array('template' => 'tgasu-extra-slider');
-  $themes['tgasu_extra_footer'] = array('template' => 'tgasu-extra-footer');
- 
- return $themes;
-}
-
-function template_preprocess_tgasu_extra_slider(&$vars){
-  $slides = array();
-  $active = 'slide-2';
-  $max_width = '940px';
-  $min_height = '312px';
-  
-  $banner_dir = 'http://localhost/devel/' . drupal_get_path('theme', 'tgasu_theme') . '/banner';
-  
-  $slides['main'] = array(
-	'title' => 'First slide',
-	'class' => '',
-	'content' => "<img src='$banner_dir/1.jpg'>",
-	'description' => '<p>Ну а тут можно выводить любой текст, в том числе и такие ссылки <a href="/node/1"><button class="btn btn-danger">подробнее</button></a></p>',
-  );
-
-  $slides['slide-2'] = array(
-	'title' => 'Second slide',
-	'class' => '',
-	'content' => "<img src='$banner_dir/2.jpg'>",
-	'description' => 'some text',
-  );
-  
-  $vars['slides'] = $slides;
-  $vars['active'] = $active;
-  $vars['max_width'] = $max_width;
-  $vars['min_height'] = $min_height;
-}
-
-function tgasu_extra_menu(){
-  $items = array();
-  
-  $items['admin/config/media/tgasu-slider'] = array(
-    'title' => t('Slider'),
-    'description' => 'Bootstrap slider for <a href="http://tgasu.ru">tgasu.ru</a>',
-    'page callback' => 'page_slides_callback',
-    'access callback' => TRUE,
-    'type' => MENU_NORMAL_ITEM,
-  );
-  
-  $items['tax'] = array(
-    'title' => t('Taxonomy work'),
-    'page callback' => 'page_tax_callback',
-    'access callback' => TRUE,
-    'type' => MENU_NORMAL_ITEM,
-  );
-  
-  return $items;
-}
-
-function page_slides_callback(){
-  $page = array();
-  /*
-  $page['preview'] = array(
-    '#title' => t('Preview'),
-    '#type' => 'markup',
-    '#markup' => theme('tgasu_extra_slider'),
-  );
-  */
-  $page['title'] = array(
-    '#title' => 'Title',
-    '#type' => 'markup',
-    '#markup' => 'Title',
-  );
-  
-  return $page;
-}
-
-function page_tax_callback(){
-  /**
-    $terms[$machine_name][] = array(
-        'name' => '',
-    );
-  */    
-  $format = 'filtered_html';  
+function tgasu_extra_update_7101(){
+  $format = 'filtered_html';
   
   // формы обучения
   $machine_name = 'tgasu_forms';
@@ -231,9 +116,7 @@ function page_tax_callback(){
         // convert array to object
         $termObj = (object) $val;
         //dsm($termObj);
-        
-        //taxonomy_term_save($termObj);
+        taxonomy_term_save($termObj);
     }
   }
-   return 'GOOD'; 
 }
